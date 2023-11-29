@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+</head>
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            margin: 50px;
+        }
+
+        h1 {
+            color: #d9534f;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #d9534f;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+        }
+    </style>
+    <h1>ToDo List</h1>
+    <form id="addTaskForm" action="/add" method="post">
+        <label for="description">New Task:</label>
+        <input type="text" id="description" name="description" required>
+        <button type="submit" id="submitButton">Add Task</button>
+    </form>
+    <!-- Display added task in textarea -->
+    <textarea id="addedTaskTextarea" readonly></textarea>
+    <form action="/delete/" method="post">
+        <button type="button" id="deleteButton">Delete Task</button>
+    </form>
+
+    <script>
+        const addTaskForm = document.getElementById('addTaskForm');
+        const addedTaskTextarea = document.getElementById('addedTaskTextarea');
+        const descriptionInput = document.getElementById('description');
+        const deleteButton = document.getElementById('deleteButton');
+    
+        addTaskForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const newTask = descriptionInput.value;
+            addedTaskTextarea.value += `${newTask}\n`;
+            // You can clear the input field if needed
+            descriptionInput.value = '';
+        });
+    
+        deleteButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            addedTaskTextarea.value = '';
+            // You can clear the input field if needed
+            descriptionInput.value = '';
+        });
+    </script>
+</body>
+</html>
